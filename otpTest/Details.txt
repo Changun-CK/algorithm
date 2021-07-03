@@ -1,0 +1,12 @@
+1.依赖环境:openssl
+
+2.验证函数:static int ET_CheckPwdz201(const std::string& otp, int otplen=6, long X=60, time_t T0=0, long t=0);
+
+3.参数说明:(除动态密码otp外,所有参数不建议修改,尽量使用默认值)
+	1.宏约束:#define PUBLIC_KEY "AE448C9CFF39F43B9ED7358852F8CC6BF3D92B2B"
+	2.otp:输入的动态密码
+	3.otplen:动态密码长度
+	4.X:时间步长(该动态密码为一分钟改变一次)
+	5.T0:T0=0
+	6.t:当前时间的UnixTime(单位:s),默认为0时自动计算当前时间,可作为测试调整,不建议修改
+	7.具体实现发现客户端超前37S, 故内部t值加了37S, 并允许前后2S误差存在.
